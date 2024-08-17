@@ -1,8 +1,11 @@
-# strava2Notion
+# strava2notion
 
-Import Strava activities to a Notion database.
+<p align="center">
+  <img src="images/strava_icon.png" alt="Strava" width="32" height="32">
+  <img src="images/notion_icon.png" alt="Notion" width="32" height="32">
+</p>
 
-I use this in conjunction with Zapier. This was for the initial import, and Zapier was for subsequent activities.
+Sync your Strava reviews to a Notion database!
 
 Inspired by [@IVIURRAY](https://github.com/IVIURRAY/strava2notion) and [@kevinschaich](https://github.com/kevinschaich/strava-to-notion).
 
@@ -29,11 +32,12 @@ Copy the link to your database page that will look like: `https://www.notion.so/
 4. `source env/bin/activate`
 5. `pip install --upgrade pip`
 6. `pip install -r requirements.txt`
-7. `python strava_api.py`
-   - This will open a browser to ask you to authenticate the integration; if you're on WSL, I recommend using `google-chrome` via WSLg.
-   - For subsequent runs set `ALL_DATA` in `config.py` to `False` to upload only new activities.
+7. `make run`
+    - This will open a browser to ask you to authenticate the integration; if you're on WSL, I recommend using `google-chrome` via WSLg.
+    - For subsequent runs set `ALL_DATA` in `config.py` to `False` to upload only new activities.
+    - You can also run it via Windows Task Scheduler (use the `.bat` file) or on a related service (e.g., as a `cronjob`)
 
-The `notion_api_test.py` file is left in for you to test adding different data to the database. See [Strava API](https://developers.strava.com/docs/reference/) for what other data is taken from the API request.
+The `notion_api_test.py` file is left in for you to test adding different data to the database. See [Strava API](https://developers.strava.com/docs/reference) for what other data is taken from the API request.
 
 ## Documentation
 

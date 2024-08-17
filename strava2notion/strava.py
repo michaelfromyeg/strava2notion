@@ -2,7 +2,8 @@ from stravaio import strava_oauth2
 from stravaio import StravaIO
 
 from strava2notion.config import CLIENT_ID, CLIENT_SECRET, ALL_DATA
-from strava2notion.notion_api import most_recent_activity_date
+from strava2notion.notion import most_recent_activity_date
+
 
 def get_activities():
     """
@@ -19,5 +20,7 @@ def get_activities():
         after_date = most_recent_activity_date()
 
     activities = client.get_logged_in_athlete_activities(after=after_date)
+    
     print("Activities fetched")
+    
     return activities

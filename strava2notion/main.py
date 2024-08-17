@@ -1,6 +1,6 @@
 from strava2notion.config import DATABASE_ID
-from strava2notion.notion_api import upload_to_notion
-from strava2notion.strava_api import get_activities
+from strava2notion.notion import upload_to_notion
+from strava2notion.strava import get_activities
 
 if __name__ == "__main__":
     parent = {"type": "database_id", "database_id": DATABASE_ID}
