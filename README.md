@@ -1,28 +1,42 @@
-# Strava to Notion exporter in Python (New Notion API)
-Import Strava activity information to a Notion database. Subsequent uploads use the most recent entry in the notion database to not double sync.
+# strava2Notion
 
-Inspired by [IVIURRAY](https://github.com/IVIURRAY/strava2notion) and updated for the new Notion API.
+Import Strava activities to a Notion database.
 
-# How to use
+I use this in conjunction with Zapier. This was for the initial import, and Zapier was for subsequent activities.
 
-### Setup 
-1. Create an App though the [Strava API](https://www.strava.com/settings/api) (I used media/notion_icon.png for the image).
-2. Insert `Client ID` and `Client Secret` into `config.py`.
-3. Create an app through the [Notion API](https://www.notion.so/) (I used media/strava_icon.png for the image). Add your secret ID to `config.py` as `TOKEN_V3`.
-4. Create a database (create this as a blank database page) in notion, copy the ID to config file. Give your notion integration access to the data base (share button).
-5. Add the relevant columns to the database, the default needs Name, Type (select), Length (number), Time (number), Date (date), Power (number), Elevation (number), Strava Link (URL). You can customise these in the `notion_api_new.py` file.
+Inspired by [@IVIURRAY](https://github.com/IVIURRAY/strava2notion) and [@kevinschaich](https://github.com/kevinschaich/strava-to-notion).
 
-### How to run
-1. `git clone https://github.com/jakesw/strava_to_notion_exporter.git`
-2. `cd strava_to_notion_exporter`
-3. create a new environment from `requirements.txt`
-4. `python3 strava_api.py` This will open a browser to ask you to authenticate the integration, I had issues running this in WSL.
-5. For subsequent runs set `All_Data` in `config.py` to `False` and it will only upload your new activities.
-  
-The `notion_api_test.py` file is left in for you to test adding different data to the database. See [Strava API](https://developers.strava.com/docs/reference/) for what other data is taken from the API request.
+## Setup
 
-#### Finding Database ID
+1. Create an app though the [Strava API](https://strava.com/settings/api); you can use [this image](./images/notion_icon.png) for the icon
+2. Insert `Client ID` and `Client Secret` into your `.env`
+3. Create an app through the [Notion API](https://notion.so); you can use [this image](./images/strava_icon.png) for the icon
+4. Add your secret as `TOKEN_V3` in your `.env`
+5. Create a database (create this as a blank database page) in Notion and copy the ID to config file; see ["Finding your Notion database ID"](#finding-your-notion-database-id)
+6. Give your Notion integration access to the database (under the `Share` button)
+7. Add the relevant columns to the database; the default needs: Name, Type (select), Length (number), Time (number), Date (date), Power (number), Elevation (number), Strava Link (URL)
+    - You can customize these in the `notion_api_new.py` file.
+
+### Finding your Notion database ID
+
 Copy the link to your database page that will look like: `https://www.notion.so/<long_hash_1>?v=<long_hash_2>` then choose `<long_hash_1>`, this is the database ID.
 
-#### Libraries
-The HTTP Requests are abstracted away by two helpful libraries: [stravio](https://github.com/sladkovm/stravaio) and [notion-sdk-py](https://github.com/ramnes/notion-sdk-py). This documentation coupled with the official API documentation is useful for debugging and customising.
+## Usage
+
+1. `gh repo clone michaelfromyeg/strava2notion`
+2. `cd strava2notion`
+3. `python3.12 -m venv env`
+4. `source env/bin/activate`
+5. `pip install --upgrade pip`
+6. `pip install -r requirements.txt`
+7. `python strava_api.py`
+   - This will open a browser to ask you to authenticate the integration; if you're on WSL, I recommend using `google-chrome` via WSLg.
+   - For subsequent runs set `ALL_DATA` in `config.py` to `False` to upload only new activities.
+
+The `notion_api_test.py` file is left in for you to test adding different data to the database. See [Strava API](https://developers.strava.com/docs/reference/) for what other data is taken from the API request.
+
+## Documentation
+
+The HTTP Requests are abstracted away by two helpful libraries: [stravio](https://github.com/sladkovm/stravaio) and [notion-sdk-py](https://github.com/ramnes/notion-sdk-py).
+
+Their documentation coupled with the official API documentation is useful for debugging and customization.
